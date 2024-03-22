@@ -1,0 +1,14 @@
+---
+- name: Copy file from one remote to another 
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Copy file from source to distination
+      copy:
+        src: home/gech/env.yml
+        dest: home/gech/
+      delegate_to: "{{ item}}"
+      with_items:
+        - "192.168.100.3"
+        - "192.168.100.2"
